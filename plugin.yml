@@ -1,0 +1,3 @@
+name: WebLog
+main: com.github.espehel.weblog.WebLog
+version: 0.102
