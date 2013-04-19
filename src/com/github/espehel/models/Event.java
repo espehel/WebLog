@@ -6,6 +6,14 @@ public class Event {
 	private int id;
 	private GregorianCalendar datetime;
 	private String name;
+	Player player;
+	
+	public Player getPlayer() {
+		return player;
+	}
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 	public int getId() {
 		return id;
 	}
