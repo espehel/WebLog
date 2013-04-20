@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import com.github.espehel.db.EventDAO;
 import com.github.espehel.models.*;
 
 public class EventListener implements Listener{
@@ -13,13 +14,14 @@ public class EventListener implements Listener{
 	WebLog plugin;
 	Player player = null;
 	Event event = null;
+	EventDAO edao = new EventDAO();
 	
 	public EventListener(WebLog plugin){
 		this.plugin=plugin;
 	}
 	
 	@EventHandler
-	public void playerJoin(PlayerJoinEvent e){	//id=0
+	public void playerJoin(PlayerJoinEvent e){
 		//set player properties
 		player = new Player();
 		player.setId(e.getPlayer().getEntityId());
@@ -27,13 +29,12 @@ public class EventListener implements Listener{
 		
 		//sets event properties
 		event = new Event();
-		event.setId(0);
 		event.setDatetime((GregorianCalendar) GregorianCalendar.getInstance());
 		event.setName(e.getEventName());
 		event.setPlayer(player);
 		
 		//sends event to db
-		//TODO implement EventDAO and PlayerDAo
+		edao.fullInsert(event);
 		
 		//Reset fields
 		clearModels();
