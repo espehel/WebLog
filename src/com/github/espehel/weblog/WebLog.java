@@ -1,5 +1,7 @@
 package com.github.espehel.weblog;
 
+import java.io.*;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class WebLog extends JavaPlugin{
@@ -12,13 +14,25 @@ public final class WebLog extends JavaPlugin{
 		//initialize
 		eventListener = new EventListener(this);
 		
+		
+		File datafolder = getDataFolder();
+		if(!datafolder.exists()){
+			datafolder.mkdir();
+			log("IMPORTANT! The directory \"WEBLOG\" has been made in your plugin directory.");
+			log("IMPORTANT! Put your database.properties file there!");
+		}
+		
 		//run
-		getLogger().info("onEnable has been invoked, fuck yeah");
+		log("onEnable has been invoked, fuck yeah");
 		getServer().getPluginManager().registerEvents(eventListener, this);
 	}	
 	//code for when the plugin is disabled. Clean up stuff
 	@Override
 	public void onDisable(){
-		getLogger().info("onDisable has been invoked");
+		log("onDisable has been invoked");
+	}
+	public void log(String text) {
+		System.out.println(text);
+		getLogger().info(text);
 	}
 }

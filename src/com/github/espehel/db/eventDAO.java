@@ -29,8 +29,9 @@ public class EventDAO extends DAO {
 			st.executeUpdate();
 			rs=st.getGeneratedKeys();
 			if(rs.next())
-				event.setId(rs.getInt("eventId"));
+				event.setId(rs.getInt(1));
 		}catch(SQLException e){
+			e.printStackTrace();
 			//TODO log this or something
 		}finally{
 			db.close(st,rs);

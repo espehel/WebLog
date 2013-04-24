@@ -3,7 +3,7 @@ package com.github.espehel.models;
 import java.util.GregorianCalendar;
 
 public class Event {
-	private int id;
+	private int id = -1;
 	private GregorianCalendar datetime;
 	private String name;
 	Player player;

@@ -31,8 +31,9 @@ public class DBConnection {
 	}
 	
 	public DBConnection(){
+		
 		try {
-			props.load(new FileInputStream(new File("resources/server.properties")));
+			props.load(new FileInputStream(new File("plugins/WebLog/database.properties")));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,6 +57,7 @@ public class DBConnection {
 		try{
 		st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		}catch(SQLException e){
+			e.printStackTrace();
 			//TODO log it
 			throw e;
 		}
@@ -102,6 +104,7 @@ public class DBConnection {
 			// if (conn != null)
 			// conn.close();
 		} catch (Exception e) {
+			e.printStackTrace();
 			//TODO log it
 		}
 	}
@@ -113,6 +116,7 @@ public class DBConnection {
 		try {
 			conn.close();
 		} catch (SQLException e) {
+			e.printStackTrace();
 			//TODO log it
 		}
 	}
@@ -125,8 +129,9 @@ public class DBConnection {
 	private void connect() throws SQLException{
 		try{
 			if(conn==null || conn.isClosed())
-				conn = DriverManager.getConnection(props.getProperty("jdbcDriver")+props.getProperty("url"), props);
+				conn = DriverManager.getConnection(props.getProperty("url"), props);
 		}catch(SQLException e){
+			e.printStackTrace();
 			//TODO log that cant connect to db, make appropriet actions
 			throw e;
 		}

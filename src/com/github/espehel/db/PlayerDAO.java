@@ -25,6 +25,7 @@ public class PlayerDAO extends DAO {
 			st.executeUpdate();
 
 		}catch(SQLException e){
+			e.printStackTrace();
 			//TODO log this or something
 		}finally{
 			db.close(st,rs);
@@ -48,9 +49,9 @@ public class PlayerDAO extends DAO {
 			
 			rs = st.executeQuery();
 			
-			exist = rs.getInt("playerId") != 0;
-			if(rs.next());
+			exist = rs.next();
 		}catch(SQLException e){
+			e.printStackTrace();
 			//TODO log this or something
 		}finally{
 			db.close(st,rs);

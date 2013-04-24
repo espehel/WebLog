@@ -24,7 +24,8 @@ public class EventListener implements Listener{
 	public void playerJoin(PlayerJoinEvent e){
 		//set player properties
 		player = new Player();
-		player.setId(e.getPlayer().getEntityId());
+		//TODO make alle classes handle long for id!
+		player.setId((int) e.getPlayer().getUniqueId().getLeastSignificantBits());
 		player.setNick(e.getPlayer().getName());
 		
 		//sets event properties
@@ -32,6 +33,9 @@ public class EventListener implements Listener{
 		event.setDatetime((GregorianCalendar) GregorianCalendar.getInstance());
 		event.setName(e.getEventName());
 		event.setPlayer(player);
+		
+		//log event
+		plugin.log("Event "+event.getName()+" triggered on player "+player.getNick());
 		
 		//sends event to db
 		edao.fullInsert(event);
